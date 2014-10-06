@@ -1,0 +1,8 @@
+#message-container{
+  height: 400px;
+  overflow-y: scroll;
+}
+
+#message-container dt{
+  text-align: left;
+}
