@@ -1,4 +1,4 @@
-defmodule Phoenix.Web do
+defmodule SecretShit.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.

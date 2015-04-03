@@ -1,4 +1,5 @@
-import {Socket} from "phoenix"
+// import {Socket} from "phoenix"
+import {Channel} from "channel"
 
 // let socket = new Socket("/ws")
 // socket.join("topic:subtopic", {}, chan => {
@@ -11,7 +12,7 @@ export default App
 
 
 // $.color = '#'+Math.floor(Math.random()*16777215).toString(16);
-// 
+//
 // var socket = new Phoenix.Socket("/ws");
 //
 // socket.join("chat", "secret", {}, function(channel) {

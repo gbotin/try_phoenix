@@ -12,7 +12,7 @@ defmodule SecretShit.Mixfile do
 
   # Configuration for the OTP application
   def application do
-    [mod: {Test, []},
+    [mod: {SecretShit, []},
      applications: [:phoenix, :cowboy, :logger]]
   end
 
