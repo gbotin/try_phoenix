@@ -7,11 +7,16 @@ defmodule SecretShit do
     import Supervisor.Spec, warn: false
 
     children = [
-      # Define workers and child supervisors to be supervised
-      # worker(TestApp.Worker, [arg1, arg2, arg3])
+      supervisor(SecretShit.Endpoint, []),
+      worker(SecretShit.Repo, []),
     ]
 
     opts = [strategy: :one_for_one, name: SecretShit.Supervisor]
     Supervisor.start_link(children, opts)
+  end
+
+  def config_change(changed, _new, removed) do
+    SecretShit.Endpoint.config_change(changed, removed)
+    :ok
   end
 end

@@ -1,4 +1,3 @@
 defmodule SecretShit.PageView do
-  use SecretShit.Views
-
+  use SecretShit.Web, :view
 end

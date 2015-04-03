@@ -1,16 +1,19 @@
 use Mix.Config
 
-config :phoenix, SecretShit.Router,
-  port: System.get_env("PORT") || 4001,
-  ssl: false,
-  cookies: true,
-  session_key: "_secret_shit_key",
-  session_secret: "4K6(P2OGU&X6*VB1VE!1YE1X+R!886Y8=YPFV31E=W)L4_(97=@Y%(6GGOH5E165K&C"
+# We don't run a server during test. If one is required,
+# you can enable the server option below.
+config :secret_shit, SecretShit.Endpoint,
+  http: [port: 4001],
+  server: false
 
-config :phoenix, :code_reloader,
-  enabled: true
+# Print only warnings and errors during test
+config :logger, level: :warn
 
-config :logger, :console,
-  level: :debug
-
-
+# Configure your database
+config :secret_shit, SecretShit.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "secret_shit_test",
+  size: 1,
+  max_overflow: false

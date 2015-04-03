@@ -1,18 +1,35 @@
 use Mix.Config
 
-config :phoenix, SecretShit.Router,
-  port: System.get_env("PORT") || 4000,
-  ssl: false,
-  host: "localhost",
-  cookies: true,
-  session_key: "_secret_shit_key",
-  session_secret: "4K6(P2OGU&X6*VB1VE!1YE1X+R!886Y8=YPFV31E=W)L4_(97=@Y%(6GGOH5E165K&C",
-  debug_errors: true
+# For development, we disable any cache and enable
+# debugging and code reloading.
+#
+# The watchers configuration can be used to run external
+# watchers to your application. For example, we use it
+# with brunch.io to recompile .js and .css sources.
+config :secret_shit, SecretShit.Endpoint,
+  http: [port: 4000],
+  debug_errors: true,
+  cache_static_lookup: false,
+  watchers: [{Path.expand("node_modules/brunch/bin/brunch"), ["watch"]}]
 
-config :phoenix, :code_reloader,
-  enabled: true
+# Watch static and templates for browser reloading.
+# *Note*: Be careful with wildcards. Larger projects
+# will use higher CPU in dev as the number of files
+# grow. Adjust as necessary.
+config :secret_shit, SecretShit.Endpoint,
+  live_reload: [Path.expand("priv/static/js/app.js"),
+                Path.expand("priv/static/css/app.css"),
+                Path.expand("web/templates/**/*.eex")]
 
-config :logger, :console,
-  level: :debug
+# Enables code reloading for development
+config :phoenix, :code_reloader, true
 
+# Do not include metadata nor timestamps in development logs
+config :logger, :console, format: "[$level] $message\n"
 
+# Configure your database
+config :secret_shit, SecretShit.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "secret_shit_dev"

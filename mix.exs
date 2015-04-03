@@ -2,19 +2,18 @@ defmodule SecretShit.Mixfile do
   use Mix.Project
 
   def project do
-    [ app: :secret_shit,
-      version: "0.0.1",
-      elixir: "~> 1.0.0-rc1",
-      elixirc_paths: ["lib", "web"],
-      deps: deps ]
+    [app: :secret_shit,
+     version: "0.0.1",
+     elixir: "~> 1.0",
+     elixirc_paths: ["lib", "web"],
+     compilers: [:phoenix] ++ Mix.compilers,
+     deps: deps]
   end
 
   # Configuration for the OTP application
   def application do
-    [
-      mod: { SecretShit, [] },
-      applications: [:phoenix, :cowboy, :logger]
-    ]
+    [mod: {Test, []},
+     applications: [:phoenix, :cowboy, :logger]]
   end
 
   # Returns the list of dependencies in the format:
@@ -24,9 +23,11 @@ defmodule SecretShit.Mixfile do
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
     [
-      {:phoenix, "0.4.1"},
-      {:cowboy, "~> 1.0.0"},
-      {:phoenix_haml, "~> 0.0.5"}
+      {:phoenix, "0.10.0"},
+      {:phoenix_ecto, "~> 0.1"},
+      {:cowboy, "~> 1.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:linguist, "~> 0.1"}
     ]
   end
 end

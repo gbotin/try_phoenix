@@ -1,23 +1,45 @@
 use Mix.Config
 
-# NOTE: To get SSL working, you will need to set:
+# For production, we configure the host to read the PORT
+# from the system environment. Therefore, you will need
+# to set PORT=80 before running your server.
 #
-#     ssl: true,
-#     keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-#     certfile: System.get_env("SOME_APP_SSL_CERT_PATH"),
+# You should also configure the url host to something
+# meaningful, we use this information when generating URLs.
+config :secret_shit, SecretShit.Endpoint,
+  http: [port: {:system, "PORT"}],
+  url: [host: "example.com"]
+
+# ## SSL Support
 #
-# Where those two env variables point to a file on disk
-# for the key and cert
+# To get SSL working, you will need to add the `https` key
+# to the previous section:
+#
+#  config:secret_shit, SecretShit.Endpoint,
+#    ...
+#    https: [port: 443,
+#            keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
+#            certfile: System.get_env("SOME_APP_SSL_CERT_PATH")]
+#
+# Where those two env variables point to a file on
+# disk for the key and cert.
 
-config :phoenix, SecretShit.Router,
-  port: System.get_env("PORT"),
-  ssl: false,
-  host: "example.com",
-  cookies: true,
-  session_key: "_secret_shit_key",
-  session_secret: "4K6(P2OGU&X6*VB1VE!1YE1X+R!886Y8=YPFV31E=W)L4_(97=@Y%(6GGOH5E165K&C"
+# Do not print debug messages in production
+config :logger, level: :info
 
-config :logger, :console,
-  level: :info,
-  metadata: [:request_id]
+# ## Using releases
+#
+# If you are doing OTP releases, you need to instruct Phoenix
+# to start the server for all endpoints:
+#
+#     config :phoenix, :serve_endpoints, true
+#
+# Alternatively, you can configure exactly which server to
+# start per endpoint:
+#
+#     config :secret_shit, SecretShit.Endpoint, server: true
+#
 
+# Finally import the config/prod.secret.exs
+# which should be versioned separately.
+import_config "prod.secret.exs"
